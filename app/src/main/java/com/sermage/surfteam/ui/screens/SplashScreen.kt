@@ -14,15 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.sermage.surfteam.R
+import com.sermage.surfteam.navigation.MAIN_SCREEN_ROUTE
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(
+    navController: NavController
+) {
     LaunchedEffect(key1 = Unit) {
         delay(2000L)
-
+        navController.navigate(MAIN_SCREEN_ROUTE)
     }
     Box(
         contentAlignment = Alignment.Center,
@@ -50,7 +55,7 @@ fun SplashScreen() {
 @Composable
 fun SplashScreenPreview() {
     SurfTeamTheme {
-        SplashScreen()
+        SplashScreen(rememberNavController())
     }
 }
 
@@ -58,6 +63,6 @@ fun SplashScreenPreview() {
 @Composable
 fun SplashScreenDarkPreview() {
     SurfTeamTheme(darkTheme = true) {
-        SplashScreen()
+        SplashScreen(rememberNavController())
     }
 }
