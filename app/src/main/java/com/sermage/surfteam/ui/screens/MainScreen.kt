@@ -2,16 +2,12 @@ package com.sermage.surfteam.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -60,22 +56,26 @@ fun MainScreen(
                 )
             }
         }
-
+        val titles = listOf("СОТРУДНИКИ", "ПРОЕКТЫ", "О ПРИЛОЖЕНИИ")
+        var selectedTabState by remember { mutableStateOf(0) }
         ScrollableTabRow(
             modifier = Modifier.padding(start = 20.dp, top = 40.dp),
-            selectedTabIndex = 0,
+            selectedTabIndex = selectedTabState,
             backgroundColor = Color.Transparent,
+            divider = {}
         ) {
-            Tab(
-                selected = true,
-                onClick = { },
-                selectedContentColor = MaterialTheme.colors.primary,
-                unselectedContentColor = MaterialTheme.colors.onSurface
-            ) {
-                Text(text = "Сотрудники")
-            }
-            Tab(selected = false, onClick = {}) {
-                Text(text = "Проекты")
+            titles.forEachIndexed { index, title ->
+                Tab(
+                    selected = selectedTabState == index,
+                    onClick = { selectedTabState = index },
+                    selectedContentColor = MaterialTheme.colors.primary,
+                    unselectedContentColor = MaterialTheme.colors.onBackground
+                ) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.h2
+                    )
+                }
             }
         }
     }
