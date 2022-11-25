@@ -7,18 +7,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
-import com.sermage.surfteam.data.Skill
+import com.sermage.surfteam.R
+import com.sermage.surfteam.data.Employee
 import com.sermage.surfteam.data.Skills
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 
@@ -27,24 +25,22 @@ import com.sermage.surfteam.ui.theme.SurfTeamTheme
 @Composable
 fun EmployeeCard(
     modifier: Modifier = Modifier,
-    employeeName: String,
-    photoUrl: String,
-    employeePosition: String,
-    skills: List<Skill>
+    employee: Employee,
+    onCardClick: (Employee) -> Unit = {}
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(20.dp),
+            .padding(horizontal = 20.dp),
         elevation = 10.dp,
-        onClick = {}
+        onClick = { onCardClick(employee) }
     ) {
         ConstraintLayout(modifier = Modifier.padding(16.dp)) {
             val (name, photo, position) = createRefs()
             val skillsGroup = createRef()
 
             Text(
-                text = employeeName,
+                text = employee.name,
                 style = MaterialTheme.typography.h1,
                 color = MaterialTheme.colors.onSurface,
                 modifier = modifier.constrainAs(name) {
@@ -53,8 +49,9 @@ fun EmployeeCard(
                 }
             )
             Image(
-                painter = rememberImagePainter(data = photoUrl,
+                painter = rememberImagePainter(data = employee.photoUrl,
                     builder = {
+                        placeholder(R.drawable.android_logo)
                         transformations(CircleCropTransformation())
                     }),
                 contentDescription = "Employee photo",
@@ -68,7 +65,7 @@ fun EmployeeCard(
             )
 
             Text(
-                text = employeePosition,
+                text = employee.position,
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.onSurface,
                 modifier = Modifier.constrainAs(position) {
@@ -77,7 +74,7 @@ fun EmployeeCard(
                 }
             )
 
-            ChipGroup(skills = skills,
+            ChipGroup(skills = employee.skills,
                 modifier = Modifier.constrainAs(skillsGroup) {
                     top.linkTo(position.bottom, margin = 8.dp)
                     start.linkTo(position.start)
@@ -91,15 +88,15 @@ fun EmployeeCard(
 fun EmployeeCardPreview() {
     val photoUrl =
         "https://static.wikia.nocookie.net/reddeadredemption/images/5/52/RDR2_Arthur_Morgan_Default.jpg/revision/latest/scale-to-width-down/350?cb=20200602191534"
-    val name = "Arthur Morgan"
+    val employee = Employee(
+        name = "Arthur Morgan",
+        photoUrl = photoUrl,
+        position = "Gunslinger",
+        skills = Skills.android
+    )
     SurfTeamTheme {
         Surface(modifier = Modifier.background(MaterialTheme.colors.background)) {
-            EmployeeCard(
-                employeeName = name,
-                photoUrl = photoUrl,
-                employeePosition = "Gunslinger",
-                skills = Skills.items
-            )
+            EmployeeCard(employee = employee)
         }
     }
 }
@@ -109,15 +106,15 @@ fun EmployeeCardPreview() {
 fun EmployeeCardDarkPreview() {
     val photoUrl =
         "https://static.wikia.nocookie.net/reddeadredemption/images/5/52/RDR2_Arthur_Morgan_Default.jpg/revision/latest/scale-to-width-down/350?cb=20200602191534"
-    val name = "Arthur Morgan"
+    val employee = Employee(
+        name = "Arthur Morgan",
+        photoUrl = photoUrl,
+        position = "Gunslinger",
+        skills = Skills.android
+    )
     SurfTeamTheme(darkTheme = true) {
         Surface(modifier = Modifier.background(MaterialTheme.colors.background)) {
-            EmployeeCard(
-                employeeName = name,
-                photoUrl = photoUrl,
-                employeePosition = "Gunslinger",
-                skills = Skills.items
-            )
+            EmployeeCard(employee = employee)
         }
 
     }

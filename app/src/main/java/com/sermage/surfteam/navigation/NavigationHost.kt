@@ -6,12 +6,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.sermage.surfteam.ui.screens.MainScreen
 import com.sermage.surfteam.ui.screens.SplashScreen
+import com.sermage.surfteam.ui.screens.main.MainScreen
 
 const val SPLASH_SCREEN_ROUTE = "splash_screen"
 const val MAIN_SCREEN_ROUTE = "main_screen"
-const val SEARCH_SCREEN_ROUTE = "search_screen"
+
 
 @Composable
 fun NavigationHost(
@@ -28,7 +28,7 @@ fun NavigationHost(
             SplashScreen(navController)
         }
         composable(MAIN_SCREEN_ROUTE) {
-            MainScreen()
+            MainScreen(navController)
         }
     }
 }

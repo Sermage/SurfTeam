@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SurfTeam</string>
+    <string name="employees_screen_tab_title">СОТРУДНИКИ</string>
+    <string name="projects_screen_tab_title">ПРОЕКТЫ</string>
+    <string name="about_app_screen_tab_title">О ПРИЛОЖЕНИИ</string>
 </resources>

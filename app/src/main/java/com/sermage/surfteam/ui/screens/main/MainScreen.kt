@@ -1,4 +1,4 @@
-package com.sermage.surfteam.ui.screens
+package com.sermage.surfteam.ui.screens.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,15 +7,22 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.rememberPagerState
 import com.sermage.surfteam.R
+import com.sermage.surfteam.data.TabItem
+import com.sermage.surfteam.ui.elements.Tabs
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun MainScreen(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -56,28 +63,12 @@ fun MainScreen(
                 )
             }
         }
-        val titles = listOf("СОТРУДНИКИ", "ПРОЕКТЫ", "О ПРИЛОЖЕНИИ")
-        var selectedTabState by remember { mutableStateOf(0) }
-        ScrollableTabRow(
-            modifier = Modifier.padding(start = 20.dp, top = 40.dp),
-            selectedTabIndex = selectedTabState,
-            backgroundColor = Color.Transparent,
-            divider = {}
-        ) {
-            titles.forEachIndexed { index, title ->
-                Tab(
-                    selected = selectedTabState == index,
-                    onClick = { selectedTabState = index },
-                    selectedContentColor = MaterialTheme.colors.primary,
-                    unselectedContentColor = MaterialTheme.colors.onBackground
-                ) {
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.h2
-                    )
-                }
-            }
-        }
+        val tabs = listOf(
+            TabItem.EmployeesScreenTab, TabItem.ProjectsScreenTab, TabItem.AboutAppTab
+        )
+        val pagerState = rememberPagerState()
+        Tabs(tabs = tabs, pagerState = pagerState)
+        TabsContent(tabs = tabs, pagerState = pagerState, modifier = Modifier.padding(top = 24.dp))
     }
 }
 
@@ -85,7 +76,7 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
     SurfTeamTheme {
-        MainScreen()
+        MainScreen(navController = rememberNavController())
     }
 }
 
@@ -93,6 +84,6 @@ fun MainScreenPreview() {
 @Composable
 fun MainScreenDarkPreview() {
     SurfTeamTheme(darkTheme = true) {
-        MainScreen()
+        MainScreen(navController = rememberNavController())
     }
 }
