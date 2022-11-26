@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
-    primary = Blue,
+    primary = DodgerBlue,
     background = BlackPearl,
     onBackground = White,
     surface = Cinder,

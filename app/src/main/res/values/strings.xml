@@ -3,4 +3,7 @@
     <string name="employees_screen_tab_title">СОТРУДНИКИ</string>
     <string name="projects_screen_tab_title">ПРОЕКТЫ</string>
     <string name="about_app_screen_tab_title">О ПРИЛОЖЕНИИ</string>
+
+    <string name="about_app_description">Приложение сделано в рамках образовательного мероприятия android отдела</string>
+    <string name="about_app_link_to_github_text">ссылка на гитхаб</string>
 </resources>

@@ -116,6 +116,5 @@ fun EmployeeCardDarkPreview() {
         Surface(modifier = Modifier.background(MaterialTheme.colors.background)) {
             EmployeeCard(employee = employee)
         }
-
     }
 }

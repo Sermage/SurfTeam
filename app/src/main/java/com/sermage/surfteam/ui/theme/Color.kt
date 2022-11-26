@@ -15,6 +15,7 @@ val Grey = Color(0xFF7C7E92)
 
 val BlackPearl = Color(0xFF10171D)
 val Cinder = Color(0xFF22292E)
+val DodgerBlue = Color(0xFF23A3FF)
 
 val Green = Color(0xFF30C150)
 val Orange = Color(0xFFF18C11)
