@@ -2,26 +2,35 @@ package com.sermage.surfteam.ui.screens.main.tabs
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomStart
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.TopEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.sermage.surfteam.R
+import com.sermage.surfteam.settings.AppTheme
 import com.sermage.surfteam.ui.elements.TextLink
+import com.sermage.surfteam.ui.screens.main.SettingsViewModel
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 
 @Composable
 fun AboutAppTabContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    vm: SettingsViewModel = hiltViewModel()
 ) {
     Box(
         modifier = modifier
@@ -53,6 +62,33 @@ fun AboutAppTabContent(
                 modifier = Modifier
                     .padding(top = 24.dp)
                     .align(CenterHorizontally)
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(BottomStart)
+                .background(color = MaterialTheme.colors.surface)
+        ) {
+            Text(
+                text = stringResource(id = R.string.switch_to_dark_theme_text),
+                color = MaterialTheme.colors.onBackground,
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(start = 20.dp, top = 24.dp)
+            )
+            val currentTheme = vm.themeState.collectAsState()
+            Switch(
+                checked = currentTheme.value == AppTheme.MODE_NIGHT ||
+                        (currentTheme.value == AppTheme.MODE_AUTO && isSystemInDarkTheme()),
+                onCheckedChange = { isChecked ->
+                    val theme = if (isChecked) AppTheme.MODE_NIGHT else AppTheme.MODE_DAY
+                    vm.changeTheme(theme)
+                },
+                modifier = Modifier
+                    .align(TopEnd)
+                    .padding(20.dp)
             )
         }
     }
