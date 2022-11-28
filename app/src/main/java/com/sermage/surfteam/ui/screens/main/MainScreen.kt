@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,7 +51,8 @@ fun MainScreen(
                     modifier = modifier
                         .align(Alignment.TopStart)
                         .padding(top = 8.dp, start = 20.dp)
-                        .size(58.dp, 40.dp)
+                        .size(58.dp, 40.dp),
+                    colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground)
                 )
 
                 Button(

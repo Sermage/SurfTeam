@@ -6,5 +6,6 @@
 
     <string name="about_app_description">Приложение сделано в рамках образовательного мероприятия android отдела</string>
     <string name="about_app_link_to_github_text">ссылка на гитхаб</string>
-    <string name="switch_to_dark_theme_text">dark mode</string>
+    <string name="switch_to_dark_theme_text">Dark mode</string>
+    <string name="about_app_button_text">Перейти в чат участников</string>
 </resources>

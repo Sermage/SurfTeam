@@ -4,17 +4,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.BottomStart
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.TopEnd
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -25,7 +24,7 @@ import com.sermage.surfteam.R
 import com.sermage.surfteam.settings.AppTheme
 import com.sermage.surfteam.ui.elements.TextLink
 import com.sermage.surfteam.ui.screens.main.SettingsViewModel
-import com.sermage.surfteam.ui.theme.SurfTeamTheme
+import com.sermage.surfteam.ui.theme.*
 
 @Composable
 fun AboutAppTabContent(
@@ -46,7 +45,8 @@ fun AboutAppTabContent(
                 modifier = Modifier
                     .align(CenterHorizontally)
                     .padding(bottom = 16.dp)
-                    .size(width = 56.dp, height = 48.dp)
+                    .size(width = 56.dp, height = 48.dp),
+                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground)
             )
             Text(
                 text = stringResource(id = R.string.about_app_description),
@@ -64,32 +64,58 @@ fun AboutAppTabContent(
                     .align(CenterHorizontally)
             )
         }
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(BottomStart)
                 .background(color = MaterialTheme.colors.surface)
         ) {
-            Text(
-                text = stringResource(id = R.string.switch_to_dark_theme_text),
-                color = MaterialTheme.colors.onBackground,
-                style = MaterialTheme.typography.body1,
+            Row(
                 modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(start = 20.dp, top = 24.dp)
-            )
-            val currentTheme = vm.themeState.collectAsState()
-            Switch(
-                checked = currentTheme.value == AppTheme.MODE_NIGHT ||
-                        (currentTheme.value == AppTheme.MODE_AUTO && isSystemInDarkTheme()),
-                onCheckedChange = { isChecked ->
-                    val theme = if (isChecked) AppTheme.MODE_NIGHT else AppTheme.MODE_DAY
-                    vm.changeTheme(theme)
-                },
-                modifier = Modifier
-                    .align(TopEnd)
-                    .padding(20.dp)
-            )
+                    .padding(start = 20.dp, end = 20.dp, top = 20.dp)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.switch_to_dark_theme_text),
+                    color = MaterialTheme.colors.onBackground,
+                    style = MaterialTheme.typography.subtitle1,
+                    modifier = Modifier
+                        .align(CenterVertically)
+                        .weight(1f)
+                )
+                val currentTheme = vm.themeState.collectAsState()
+                Switch(
+                    checked = currentTheme.value == AppTheme.MODE_NIGHT ||
+                            (currentTheme.value == AppTheme.MODE_AUTO && isSystemInDarkTheme()),
+                    onCheckedChange = { isChecked ->
+                        val theme = if (isChecked) AppTheme.MODE_NIGHT else AppTheme.MODE_DAY
+                        vm.changeTheme(theme)
+                    },
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = Grey,
+                        checkedTrackColor = BlackPearl,
+                        uncheckedThumbColor = Blue,
+                        uncheckedTrackColor = Blue.copy(alpha = 0.38f)
+                    ),
+                    modifier = Modifier
+                        .align(CenterVertically)
+                )
+            }
+            val uriHandler = LocalUriHandler.current
+
+            Button(modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 24.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colors.primary,
+                    contentColor = White
+                ),
+                contentPadding = PaddingValues(13.dp),
+                onClick = { uriHandler.openUri("https://discord.com/channels/961903679055732766/981139239611809822") }) {
+                Text(
+                    text = stringResource(id = R.string.about_app_button_text),
+                    style = MaterialTheme.typography.subtitle2
+                )
+            }
         }
     }
 }
