@@ -7,7 +7,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,6 +19,7 @@ import com.sermage.surfteam.R
 import com.sermage.surfteam.data.TabItem
 import com.sermage.surfteam.settings.isDarkTheme
 import com.sermage.surfteam.ui.elements.Tabs
+import com.sermage.surfteam.ui.theme.LocalDrawableResources
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 
 @OptIn(ExperimentalPagerApi::class)
@@ -45,14 +45,13 @@ fun MainScreen(
             ) {
                 Image(
                     painter = painterResource(
-                        id = R.drawable.surf_logo
+                        id = LocalDrawableResources.current.surfLogo
                     ),
                     contentDescription = "Surf logo",
                     modifier = modifier
                         .align(Alignment.TopStart)
                         .padding(top = 8.dp, start = 20.dp)
-                        .size(58.dp, 40.dp),
-                    colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground)
+                        .size(58.dp, 40.dp)
                 )
 
                 Button(

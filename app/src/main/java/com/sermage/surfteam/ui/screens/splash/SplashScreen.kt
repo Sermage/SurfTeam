@@ -16,8 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.sermage.surfteam.R
 import com.sermage.surfteam.navigation.MAIN_SCREEN_ROUTE
+import com.sermage.surfteam.ui.theme.LocalDrawableResources
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 import kotlinx.coroutines.delay
 
@@ -36,12 +36,12 @@ fun SplashScreen(
             .background(color = MaterialTheme.colors.background)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.splash_image),
+            painter = painterResource(id = LocalDrawableResources.current.splashImage),
             contentDescription = "Surf logo",
             modifier = Modifier.size(width = 320.dp, height = 419.dp)
         )
         Image(
-            painter = painterResource(id = R.drawable.android_logo),
+            painter = painterResource(id = LocalDrawableResources.current.androidLogo),
             contentDescription = "android logo",
             modifier = Modifier
                 .size(width = 100.dp, height = 80.dp)

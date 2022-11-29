@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment.Companion.BottomStart
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -40,13 +39,12 @@ fun AboutAppTabContent(
                 .align(Alignment.Center)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.android_logo_grey),
+                painter = painterResource(id = LocalDrawableResources.current.androidLogoGrey),
                 contentDescription = "android logo",
                 modifier = Modifier
                     .align(CenterHorizontally)
                     .padding(bottom = 16.dp)
-                    .size(width = 56.dp, height = 48.dp),
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground)
+                    .size(width = 56.dp, height = 48.dp)
             )
             Text(
                 text = stringResource(id = R.string.about_app_description),

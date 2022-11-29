@@ -51,7 +51,7 @@ fun EmployeeCard(
             Image(
                 painter = rememberImagePainter(data = employee.photoUrl,
                     builder = {
-                        placeholder(R.drawable.android_logo)
+                        placeholder(R.drawable.android_logo_night)
                         transformations(CircleCropTransformation())
                     }),
                 contentDescription = "Employee photo",
