@@ -21,7 +21,7 @@ fun EmployeesTabContent(
     LazyColumn(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(bottom = 24.dp)
+        contentPadding = PaddingValues(bottom = 24.dp, top = 12.dp)
     ) {
         items(employees) { employee ->
             EmployeeCard(employee = employee)

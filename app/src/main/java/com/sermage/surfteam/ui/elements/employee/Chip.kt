@@ -12,7 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sermage.surfteam.ui.theme.*
+import com.sermage.surfteam.ui.theme.Green
+import com.sermage.surfteam.ui.theme.Grey
+import com.sermage.surfteam.ui.theme.SurfTeamTheme
 
 @Composable
 fun Chip(

@@ -80,7 +80,7 @@ fun MainScreen(
             TabsContent(
                 tabs = tabs,
                 pagerState = pagerState,
-                modifier = Modifier.padding(top = 24.dp)
+                modifier = Modifier.padding(top = 12.dp)
             )
         }
     }
