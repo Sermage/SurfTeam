@@ -2,12 +2,11 @@ package com.sermage.surfteam.ui.elements
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +34,11 @@ fun EmployeeCard(
         elevation = 10.dp,
         onClick = { onCardClick(employee) }
     ) {
-        ConstraintLayout(modifier = Modifier.padding(16.dp)) {
+        ConstraintLayout(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+        ) {
             val (name, photo, position) = createRefs()
             val skillsGroup = createRef()
 
@@ -75,10 +78,13 @@ fun EmployeeCard(
             )
 
             ChipGroup(skills = employee.skills,
-                modifier = Modifier.constrainAs(skillsGroup) {
-                    top.linkTo(position.bottom, margin = 8.dp)
-                    start.linkTo(position.start)
-                })
+                modifier = Modifier
+                    .width(IntrinsicSize.Min)
+                    .clipToBounds()
+                    .constrainAs(skillsGroup) {
+                        top.linkTo(position.bottom, margin = 8.dp)
+                        start.linkTo(position.start)
+                    })
         }
     }
 }
