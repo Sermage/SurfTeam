@@ -24,7 +24,12 @@ fun NavigationHost(
         startDestination = startDestination
     ) {
         composable(SPLASH_SCREEN_ROUTE) {
-            SplashScreen(navController)
+            SplashScreen(navigateToMainScreen = {
+                navController.navigate(MAIN_SCREEN_ROUTE) {
+                    launchSingleTop = true
+                    popUpTo(SPLASH_SCREEN_ROUTE) { inclusive = true }
+                }
+            })
         }
         composable(MAIN_SCREEN_ROUTE) {
             MainScreen(navController)

@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sermage.surfteam.data.projects
-import com.sermage.surfteam.ui.elements.ProjectCard
+import com.sermage.surfteam.ui.elements.project.ProjectCard
 
 @Composable
 fun ProjectsTabContent(

@@ -1,4 +1,4 @@
-package com.sermage.surfteam.ui.elements
+package com.sermage.surfteam.ui.elements.project
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,8 +15,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.sermage.surfteam.R
 import com.sermage.surfteam.data.Project
 import com.sermage.surfteam.data.projects
-import com.sermage.surfteam.ui.elements.project.AvatarRow
-import com.sermage.surfteam.ui.elements.project.ProjectLabel
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 import com.sermage.surfteam.utils.ColorPicker
 

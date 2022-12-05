@@ -1,5 +1,6 @@
 package com.sermage.surfteam.ui.screens.main
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -30,6 +31,10 @@ fun MainScreen(
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
     val currentTheme = settingsViewModel.themeState.collectAsState()
+
+    BackHandler() {
+        navController.popBackStack()
+    }
     SurfTeamTheme(
         darkTheme = currentTheme.value.isDarkTheme()
     ) {

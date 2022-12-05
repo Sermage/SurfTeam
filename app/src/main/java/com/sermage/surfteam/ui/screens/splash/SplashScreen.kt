@@ -15,9 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.sermage.surfteam.navigation.MAIN_SCREEN_ROUTE
 import com.sermage.surfteam.ui.theme.LocalDrawableResources
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 import kotlinx.coroutines.delay
@@ -25,7 +22,7 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SplashScreen(
-    navController: NavController
+    navigateToMainScreen: () -> Unit
 ) {
     var visible by remember { mutableStateOf(false) }
     LaunchedEffect(key1 = Unit) {
@@ -33,7 +30,7 @@ fun SplashScreen(
         delay(2000L)
         visible = false
         delay(1000L)
-        navController.navigate(MAIN_SCREEN_ROUTE)
+        navigateToMainScreen()
     }
 
     AnimatedVisibility(
@@ -78,7 +75,7 @@ fun SplashScreen(
 @Composable
 fun SplashScreenPreview() {
     SurfTeamTheme {
-        SplashScreen(rememberNavController())
+        SplashScreen {}
     }
 }
 
@@ -86,6 +83,6 @@ fun SplashScreenPreview() {
 @Composable
 fun SplashScreenDarkPreview() {
     SurfTeamTheme(darkTheme = true) {
-        SplashScreen(rememberNavController())
+        SplashScreen {}
     }
 }
