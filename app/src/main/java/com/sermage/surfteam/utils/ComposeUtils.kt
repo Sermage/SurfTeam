@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.layout.MeasurePolicy
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.unit.Dp
 
@@ -36,4 +37,18 @@ fun Modifier.customTabIndicatorOffset(
         .wrapContentSize(Alignment.BottomStart)
         .offset(x = indicatorOffset)
         .width(currentTabWidth)
+}
+
+fun overlappingRowMeasurePolicy(overlapFactor: Float) = MeasurePolicy { measurables, constraints ->
+    val placeables = measurables.map { measurable -> measurable.measure(constraints) }
+    val height = placeables.maxOf { it.height }
+    val width = (placeables.subList(1, placeables.size)
+        .sumOf { it.width } * overlapFactor + placeables[0].width).toInt()
+    layout(width, height) {
+        var xPos = 0
+        for (placeable in placeables) {
+            placeable.placeRelative(xPos, 0, 0f)
+            xPos += (placeable.width * overlapFactor).toInt()
+        }
+    }
 }
