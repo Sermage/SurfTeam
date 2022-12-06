@@ -1,4 +1,4 @@
-package com.sermage.surfteam.ui.screens.main
+package com.sermage.surfteam.ui.screens.main.tabs
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,7 +16,8 @@ import com.sermage.surfteam.ui.theme.SurfTeamTheme
 @Composable
 fun EmployeesTabContent(
     employees: List<Employee>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onEmployeeCardClick: (String) -> Unit = {},
 ) {
     LazyColumn(
         modifier = modifier,
@@ -24,7 +25,8 @@ fun EmployeesTabContent(
         contentPadding = PaddingValues(bottom = 24.dp, top = 12.dp)
     ) {
         items(employees) { employee ->
-            EmployeeCard(employee = employee)
+            EmployeeCard(employee = employee,
+                onCardClick = { onEmployeeCardClick(it) })
         }
     }
 }

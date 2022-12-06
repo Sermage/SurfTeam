@@ -25,14 +25,14 @@ import com.sermage.surfteam.ui.theme.SurfTeamTheme
 fun EmployeeCard(
     modifier: Modifier = Modifier,
     employee: Employee,
-    onCardClick: (Employee) -> Unit = {}
+    onCardClick: (String) -> Unit = {}
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp),
         elevation = 10.dp,
-        onClick = { onCardClick(employee) }
+        onClick = { onCardClick(employee.id) }
     ) {
         ConstraintLayout(
             modifier = Modifier

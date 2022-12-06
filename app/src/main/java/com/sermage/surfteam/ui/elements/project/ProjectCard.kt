@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -15,6 +16,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.sermage.surfteam.R
 import com.sermage.surfteam.data.Project
 import com.sermage.surfteam.data.projects
+import com.sermage.surfteam.ui.theme.LuckyPoint
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 import com.sermage.surfteam.utils.ColorPicker
 
@@ -27,8 +29,8 @@ fun ProjectCard(
 ) {
     Card(modifier = modifier
         .fillMaxWidth()
-        .padding(horizontal = 20.dp),
-        elevation = 10.dp,
+        .padding(horizontal = 20.dp)
+        .shadow(elevation = 10.dp, ambientColor = LuckyPoint.copy(alpha = 0.1f)),
         onClick = { onProjectClick(project) }
     ) {
         ConstraintLayout(

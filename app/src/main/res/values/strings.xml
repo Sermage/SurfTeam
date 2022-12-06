@@ -8,4 +8,14 @@
     <string name="about_app_link_to_github_text">ссылка на гитхаб</string>
     <string name="switch_to_dark_theme_text">Dark mode</string>
     <string name="about_app_button_text">Перейти в чат участников</string>
+
+    <string name="personal_info_text">%d лет, %s</string>
+    <string name="about_employee_title">О сотруднике</string>
+    <string name="employee_details_position_title">Должность</string>
+    <string name="employee_details_experience_title">Опыт работы</string>
+    <string name="employee_details_department_title">Отдел</string>
+    <string name="employee_details_experience_text">%d лет</string>
+    <string name="employee_details_current_project_title">Текущий проект</string>
+    <string name="employee_details_skills_title">Навыки</string>
+
 </resources>

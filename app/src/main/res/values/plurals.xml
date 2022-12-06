@@ -7,4 +7,9 @@
         <item quantity="other">%d участника</item>
     </plurals>
 
+    <plurals name="number_of_projects">
+        <item quantity="one">Участвовала в %d проекте</item>
+        <item quantity="other">Участвовала в %d проектах</item>
+    </plurals>
+
 </resources>

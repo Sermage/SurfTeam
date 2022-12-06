@@ -12,28 +12,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.sermage.surfteam.R
 import com.sermage.surfteam.data.TabItem
 import com.sermage.surfteam.settings.isDarkTheme
 import com.sermage.surfteam.ui.elements.Tabs
+import com.sermage.surfteam.ui.elements.common.ActionButton
 import com.sermage.surfteam.ui.theme.LocalDrawableResources
 import com.sermage.surfteam.ui.theme.SurfTeamTheme
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun MainScreen(
-    navController: NavController,
     modifier: Modifier = Modifier,
-    settingsViewModel: SettingsViewModel = hiltViewModel()
+    settingsViewModel: SettingsViewModel = hiltViewModel(),
+    backClick: () -> Unit = {},
+    onEmployeeCardClick: (String) -> Unit = {}
 ) {
     val currentTheme = settingsViewModel.themeState.collectAsState()
 
     BackHandler() {
-        navController.popBackStack()
+        backClick()
     }
     SurfTeamTheme(
         darkTheme = currentTheme.value.isDarkTheme()
@@ -59,23 +59,14 @@ fun MainScreen(
                         .size(58.dp, 40.dp)
                 )
 
-                Button(
+                ActionButton(
                     onClick = {},
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(top = 8.dp, end = 20.dp)
-                        .size(40.dp),
-                    contentPadding = PaddingValues(10.dp),
-                    shape = MaterialTheme.shapes.small,
-                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_search),
-                        tint = MaterialTheme.colors.onSurface,
-                        contentDescription = "Search icon",
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
+                        .padding(top = 8.dp, end = 20.dp),
+                    iconRes = R.drawable.ic_search,
+                    iconContentDescription = "Search icon"
+                )
             }
             val tabs = listOf(
                 TabItem.EmployeesScreenTab, TabItem.ProjectsScreenTab, TabItem.AboutAppTab
@@ -85,7 +76,8 @@ fun MainScreen(
             TabsContent(
                 tabs = tabs,
                 pagerState = pagerState,
-                modifier = Modifier.padding(top = 12.dp)
+                modifier = Modifier.padding(top = 12.dp),
+                onEmployeeCardClick = { onEmployeeCardClick(it) }
             )
         }
     }
@@ -95,7 +87,7 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
     SurfTeamTheme {
-        MainScreen(navController = rememberNavController())
+        MainScreen()
     }
 }
 
@@ -103,6 +95,6 @@ fun MainScreenPreview() {
 @Composable
 fun MainScreenDarkPreview() {
     SurfTeamTheme(darkTheme = true) {
-        MainScreen(navController = rememberNavController())
+        MainScreen()
     }
 }
