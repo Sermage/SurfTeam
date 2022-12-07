@@ -14,7 +14,8 @@ import com.sermage.surfteam.ui.elements.project.ProjectCard
 
 @Composable
 fun ProjectsTabContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onProjectCardClick: (String) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier,
@@ -22,7 +23,7 @@ fun ProjectsTabContent(
         contentPadding = PaddingValues(bottom = 24.dp, top = 12.dp)
     ) {
         items(projects) { project ->
-            ProjectCard(project = project)
+            ProjectCard(project = project, onProjectClick = { onProjectCardClick(it.name) })
         }
     }
 }

@@ -28,7 +28,8 @@ fun MainScreen(
     modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     backClick: () -> Unit = {},
-    onEmployeeCardClick: (String) -> Unit = {}
+    onEmployeeCardClick: (String) -> Unit = {},
+    onProjectCardClick: (String) -> Unit = {}
 ) {
     val currentTheme = settingsViewModel.themeState.collectAsState()
 
@@ -77,7 +78,8 @@ fun MainScreen(
                 tabs = tabs,
                 pagerState = pagerState,
                 modifier = Modifier.padding(top = 12.dp),
-                onEmployeeCardClick = { onEmployeeCardClick(it) }
+                onEmployeeCardClick = { onEmployeeCardClick(it) },
+                onProjectCardClick = { onProjectCardClick(it) }
             )
         }
     }

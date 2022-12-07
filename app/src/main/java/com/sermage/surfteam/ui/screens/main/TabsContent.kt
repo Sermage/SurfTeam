@@ -17,7 +17,8 @@ fun TabsContent(
     modifier: Modifier = Modifier,
     tabs: List<TabItem>,
     pagerState: PagerState,
-    onEmployeeCardClick: (String) -> Unit
+    onEmployeeCardClick: (String) -> Unit,
+    onProjectCardClick: (String) -> Unit
 ) {
     HorizontalPager(
         state = pagerState,
@@ -28,7 +29,7 @@ fun TabsContent(
             0 -> EmployeesTabContent(
                 employees = employees,
                 onEmployeeCardClick = { onEmployeeCardClick(it) })
-            1 -> ProjectsTabContent()
+            1 -> ProjectsTabContent(onProjectCardClick = { onProjectCardClick(it) })
             2 -> AboutAppTabContent()
         }
     }

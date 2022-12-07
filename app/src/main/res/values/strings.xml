@@ -18,4 +18,9 @@
     <string name="employee_details_current_project_title">Текущий проект</string>
     <string name="employee_details_skills_title">Навыки</string>
 
+    <string name="project_details_about_project_title">О проекте</string>
+    <string name="project_details_team_title">Команда</string>
+    <string name="project_detaills_all_team">Все %d участников</string>
+    <string name="project_details_project_duration_title">Время жизни проекта (счетчик)</string>
+
 </resources>
