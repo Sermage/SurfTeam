@@ -1,6 +1,7 @@
 package com.sermage.surfteam.ui.screens.employee_details
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -22,7 +23,8 @@ import com.sermage.surfteam.ui.theme.SurfTeamTheme
 @Composable
 fun SmallProjectCard(
     modifier: Modifier = Modifier,
-    project: Project
+    project: Project,
+    onClick: (String) -> Unit = {}
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -31,6 +33,7 @@ fun SmallProjectCard(
                 color = MaterialTheme.colors.background,
                 shape = MaterialTheme.shapes.medium
             )
+            .clickable { onClick(project.name) }
     ) {
         val (label, name, currentProject, icon) = createRefs()
         ProjectLabel(projectName = project.name,

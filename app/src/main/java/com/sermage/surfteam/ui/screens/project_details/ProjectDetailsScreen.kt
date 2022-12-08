@@ -105,7 +105,8 @@ fun ProjectDetailsScreen(
                     end.linkTo(parent.end)
                     top.linkTo(topSection.bottom)
                     bottom.linkTo(parent.bottom)
-                })
+                }
+            )
         }
     }
 }

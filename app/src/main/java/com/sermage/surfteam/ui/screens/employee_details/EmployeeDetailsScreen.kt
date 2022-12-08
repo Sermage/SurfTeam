@@ -36,7 +36,8 @@ fun EmployeeDetailsScreen(
     modifier: Modifier = Modifier,
     employeeId: String,
     settingsViewModel: SettingsViewModel = hiltViewModel(),
-    backClick: () -> Unit = {}
+    backClick: () -> Unit = {},
+    onProjectCardClick: (String) -> Unit = {}
 ) {
     BackHandler {
         backClick()
@@ -140,7 +141,8 @@ fun EmployeeDetailsScreen(
                     end.linkTo(parent.end)
                     top.linkTo(infoColumn.bottom, margin = 40.dp)
                     bottom.linkTo(parent.bottom)
-                })
+                },
+                onProjectCardClick = { onProjectCardClick(it) })
 
         }
     }
@@ -150,7 +152,8 @@ fun EmployeeDetailsScreen(
 @Composable
 private fun EmployeeInfoBox(
     modifier: Modifier = Modifier,
-    employee: Employee
+    employee: Employee,
+    onProjectCardClick: (String) -> Unit
 ) {
     Card(
         modifier = modifier
@@ -218,7 +221,8 @@ private fun EmployeeInfoBox(
 
             SmallProjectCard(
                 project = employee.currentProject,
-                modifier = Modifier.padding(vertical = 24.dp, horizontal = 20.dp)
+                modifier = Modifier.padding(vertical = 24.dp, horizontal = 20.dp),
+                onClick = { onProjectCardClick(it) }
             )
 
             Text(

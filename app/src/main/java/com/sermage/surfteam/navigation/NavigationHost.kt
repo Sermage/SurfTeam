@@ -59,7 +59,10 @@ fun NavigationHost(
         ) {
             EmployeeDetailsScreen(
                 employeeId = it.arguments?.getString(EMPLOYEE_ID) ?: "",
-                backClick = { navController.popBackStack() }
+                backClick = { navController.popBackStack() },
+                onProjectCardClick = { projectName ->
+                    navController.navigate("$PROJECT_DETAILS_SCREEN_ROUTE/$projectName")
+                }
             )
         }
 
